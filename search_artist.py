@@ -7,6 +7,7 @@ Created on Sun Mar  6 18:42:34 2022
 
 import musicbrainzngs
 import sys
+import urllib3
 
 musicbrainzngs.set_useragent(
     "python-search-artist_example",
