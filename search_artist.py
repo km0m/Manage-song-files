@@ -27,7 +27,14 @@ musicbrainzngs.set_useragent(
 
 musicbrainzngs.set_rate_limit(limit_or_interval=False, new_requests=1)
 
-result = musicbrainzngs.search_artists(query=artist_name, limit=None, offset=None, strict=False)
+result = musicbrainzngs.search_artists(query=artist_name, limit=None, offset=None, strict=True)
+artist_id = result['artist-list'][0]['id']
 
-for artist in result['artist-list']:
-    print("{name}: {id}".format(name=artist["name"], id=artist['id']))
+artist = musicbrainzngs.get_artist_by_id(artist_id, includes=['releases'])
+
+for release in artist['artist']['release-list']:
+  release_id = release['id']
+  media = musicbrainzngs.get_release_by_id(release_id, includes=['media'])
+  print(media['release']['title'])
+#for artist in result['artist-list']:
+#    print("{name}: {id}".format(name=artist["name"], id=artist['id']))['id']
